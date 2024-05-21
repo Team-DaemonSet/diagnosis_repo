@@ -82,7 +82,8 @@ body {
   background-color: #007bff; /* 파란색 호버 배경 변경 */
 }
 
-button, .upload-button {
+button,
+.upload-button {
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
@@ -93,7 +94,8 @@ button, .upload-button {
   transition: background-color 0.3s ease;
 }
 
-button:hover, .upload-button:hover {
+button:hover,
+.upload-button:hover {
   background-color: #007bff; /* 파란색 호버 배경 변경 */
 }
 
@@ -148,7 +150,7 @@ button:hover, .upload-button:hover {
 .infield {
   margin-bottom: 15px;
   width: 100%;
-} 
+}
 
 .infield input {
   width: 100%;
@@ -174,11 +176,3 @@ button.forgot:hover {
   color: green;
   margin-left: 10px;
 }
-
-
-
-
-
-
-
-

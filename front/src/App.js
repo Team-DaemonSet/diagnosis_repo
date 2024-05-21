@@ -108,10 +108,11 @@ const DiagnosisPage = () => {
   const [diagnosis, setDiagnosis] = useState('');
   const [result, setResult] = useState('');
 
+  // 파일을 선택할 때 호출되는 함수
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
-
+  // 파일을 서버로 업로드할 때 호출되는 함수
   const handleUpload = async () => {
     if (!file) {
       alert('파일을 선택해주세요.');
@@ -176,4 +177,6 @@ function App() {
 }
 
 export default App;
+
+
 
