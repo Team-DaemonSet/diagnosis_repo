@@ -1,0 +1,6 @@
+Flask==3.0.3
+Flask-Cors==4.0.0
+numpy==1.26.4
+Pillow==10.3.0
+onnxruntime==1.17.3
+
