@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import DefaultPage from './components/DefaultPage';
-
-import SignUpPage from './components/SignUpPage';
 import SignInPage from './components/SignInPage';
+import SignUpPage from './components/SignUpPage';
 import DiagnosisPage from './components/DiagnosisPage';
 
 function App() {
