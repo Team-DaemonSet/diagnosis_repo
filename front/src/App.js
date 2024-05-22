@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import SignInPage from './components/signinpage'
-import SignUpPage from './components/signuppage'
-import DiagnosisPage from './components/diagnosepage';
-
-
-
-const DefaultPage = () => (
-  <div className="default-page">
-    <h1>기본 페이지입니다.<hr></hr>기본 페이지라고 말했습니다.</h1>
-  </div>
-);
+import DefaultPage from './components/DefaultPage';
+import SignInPage from './components/SignInPage';
+import SignUpPage from './components/SignUpPage';
+import DiagnosisPage from './components/DiagnosisPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
 
   return (
     <Router>
@@ -39,6 +31,3 @@ function App() {
 }
 
 export default App;
-
-
-
