@@ -16,6 +16,7 @@ const DefaultPage = () => (
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+
   return (
     <Router>
       <div className="container">
