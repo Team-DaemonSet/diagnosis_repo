@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinner
-
+import axios from 'axios';
 
 
 
@@ -11,14 +11,32 @@ import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinner
 const SignInPage = ({ setIsAuthenticated }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleSignIn = (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
-        // Here you can add authentication logic
-        // For simplicity, we'll just set isAuthenticated to true
-        setIsAuthenticated(true);
-        navigate('/diagnosis');
+        setIsLoading(true);
+
+        try {
+            const response = await axios.post('http://localhost:5012/signin', {
+                email: email,
+                password: password
+            }, {
+                headers: {'Content-Type': 'application/json'}
+            });
+
+            setMessage(response.data.msg);
+            if (response.status === 200) {
+                setIsAuthenticated(true);
+                navigate('/diagnosis');
+            }
+        } catch (error) {
+            setMessage('Incorrect email or password');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
