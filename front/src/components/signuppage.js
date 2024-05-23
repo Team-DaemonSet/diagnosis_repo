@@ -21,9 +21,9 @@ const SignUpPage = () => {
     return (
         <div className="form-container sign-up-container">
             <form>
-                <h1>Create Account</h1>
+                <h1>Create Account 😈</h1>
                 <LoadingSpinner /> {/* Use LoadingSpinner here */}
-                <span>or use your email for registration</span>
+                
                 <div className="infield">
                     <input type="text" placeholder="Name" />
                     <label></label>
