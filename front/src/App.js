@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<DefaultPage />} />
           <Route path="/signin" element={<SignInPage setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/diagnosis" element={isAuthenticated ? <DiagnosisPage /> : <DefaultPage />} />
+          <Route path="/diagnosis" element={isAuthenticated ? <DiagnosisPage /> : <SignInPage />} />
         </Routes>
       </div>
     </Router>

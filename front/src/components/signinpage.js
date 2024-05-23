@@ -24,9 +24,9 @@ const SignInPage = ({ setIsAuthenticated }) => {
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={handleSignIn}>
-                <h1>Sign in</h1>
+                <h1>Sign in 😈</h1>
                 <LoadingSpinner /> {/* Use LoadingSpinner here */}
-                <span>or use your account</span>
+                
                 <div className="infield">
                     <input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <label></label>
@@ -35,7 +35,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <label></label>
                 </div>
-                <button type="submit" className="forgot">Forgot your password?</button>
+                <button type="submit" className="forgot">DaemonSet입니다. 환영합니다.</button>
                 <button type="submit">Sign In</button>
             </form>
         </div>
