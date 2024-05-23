@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import './SignInPage.css';
 import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinner
-
-
-
-
-
 
 const SignInPage = ({ setIsAuthenticated }) => {
     const [email, setEmail] = useState('');
@@ -35,7 +31,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <label></label>
                 </div>
-                <button type="submit" className="forgot">DaemonSet입니다. 환영합니다.</button>
+                <button type="submit" className="forgot no-hover">DaemonSet입니다. 환영합니다.</button>
                 <button type="submit">Sign In</button>
             </form>
         </div>
