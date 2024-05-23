@@ -58,8 +58,6 @@ const SignUpPage = () => {
 };
 
 
-<<<<<<< HEAD
+
 export default SignUpPage; 
-=======
-export default SignUpPage; 
->>>>>>> 8ed60cb141b4e5ffc57b631179aa911b12c7384c
+

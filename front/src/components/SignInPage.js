@@ -12,11 +12,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
     const handleSignIn = (e) => {
         e.preventDefault();
         // Here you can add authentication logic
-<<<<<<< HEAD
-        // For simplicity, we'll just set isAuthenticated to true ***
-=======
-        // For simplicity, we'll just set isAuthenticated to true
->>>>>>> 8ed60cb141b4e5ffc57b631179aa911b12c7384c
+
         setIsAuthenticated(true);
         navigate('/diagnosis');
     };
