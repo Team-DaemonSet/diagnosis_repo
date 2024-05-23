@@ -47,7 +47,11 @@ const DiagnosisPage = () => {
             const predictResponse = await axios.post('http://localhost:5003/predict', {
                 preprocessed_path: preprocessed_path
             });
+<<<<<<< HEAD
             const { outputs } = predictResponse.data; 
+=======
+            const { outputs } = predictResponse.data;
+>>>>>>> 8ed60cb141b4e5ffc57b631179aa911b12c7384c
 
             // Step 4: 결과 해석
             const interpretResponse = await axios.post('http://localhost:5004/interpret', {

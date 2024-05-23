@@ -39,7 +39,11 @@ body {
 }
 
 .nav-links a {
+<<<<<<< HEAD
   padding: 5px 10px;
+=======
+  padding: 10px 20px;
+>>>>>>> 8ed60cb141b4e5ffc57b631179aa911b12c7384c
   font-size: 16px;
   cursor: pointer;
   background-color: #1e90ff; /* 파란색 배경 */
@@ -53,3 +57,158 @@ body {
 .nav-links a:hover {
   background-color: #007bff; /* 파란색 호버 배경 변경 */
 }
+<<<<<<< HEAD
+=======
+
+.upload-section {
+  margin-top: 60px; /* 상단 여백 추가 */
+  text-align: center;
+}
+
+.results-section {
+  text-align: center;
+}
+
+.custom-file-input {
+  display: none;
+}
+
+.custom-file-input + label {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #1e90ff; /* 파란색 배경 */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-input + label:hover {
+  background-color: #007bff; /* 파란색 호버 배경 변경 */
+}
+
+button,
+.upload-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #1e90ff; /* 파란색 배경 */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.upload-button:hover {
+  background-color: #007bff; /* 파란색 호버 배경 변경 */
+}
+
+.diagnosis-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px; /* 버튼 크기 조정 */
+  font-size: 16px; /* 글자 크기 조정 */
+  cursor: pointer;
+  background-color: #1e90ff; /* 파란색 배경 */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.diagnosis-button:hover {
+  background-color: #007bff; /* 파란색 호버 배경 변경 */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  margin: auto;
+}
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.social {
+  background: #333333;
+  border: none;
+  color: #ffffff;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.social:hover {
+  background: #555555;
+}
+
+.infield {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.infield input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+button.forgot {
+  background: none;
+  border: none;
+  color: #1e90ff;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button.forgot:hover {
+  color: #007bff;
+}
+
+.checkmark {
+  color: green;
+  margin-left: 10px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: black;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.image-preview {
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+>>>>>>> 8ed60cb141b4e5ffc57b631179aa911b12c7384c
