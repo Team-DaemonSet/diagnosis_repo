@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
+
+import './components/DefaultPage.css';
+import './components/SignInPage.css';
+import './components/SignUpPage.css';
+import './components/DiagnosisPage.css';
 import DefaultPage from './components/DefaultPage';
 import SignInPage from './components/SignInPage';
 import SignUpPage from './components/SignUpPage';
@@ -16,8 +21,17 @@ function App() {
           <Link to="/" className="daemonset-logo">DaemonSet</Link>
         </div>
         <div className="nav-links">
-          <Link to="/signin">Sign In</Link>
-          <Link to="/signup">Sign Up</Link>
+          {isAuthenticated ? (
+            <>
+              <Link to="/diagnosis">Diagnosis</Link>
+              <button onClick={() => setIsAuthenticated(false)}>Sign Out</button>
+            </>
+          ) : (
+            <>
+              <Link to="/signin">Sign In</Link>
+              <Link to="/signup">Sign Up</Link>
+            </>
+          )}
         </div>
         <Routes>
           <Route path="/" element={<DefaultPage />} />

@@ -1,0 +1,10 @@
+.default-page {
+    text-align: center;
+    margin-top: 60px;
+    /* 상단 여백 추가 */
+}
+
+.default-page h1 {
+    margin: 0;
+    padding: 0;
+}
