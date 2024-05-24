@@ -30,6 +30,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
             setMessage(response.data.msg);
             if (response.status === 200) {
                 setIsAuthenticated(true);
+                localStorage.setItem('token', response.data.access_token); // Save the token
                 navigate('/diagnosis');
             }
         } catch (error) {
@@ -55,6 +56,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
                 </div>
                 <button type="submit" className="forgot">DaemonSet입니다. 환영합니다.</button>
                 <button type="submit">Sign In</button>
+                {message && <p>{message}</p>}
             </form>
         </div>
     );
