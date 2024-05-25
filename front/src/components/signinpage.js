@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinner
 import axios from 'axios';
-
-
-
-
 
 const SignInPage = ({ setIsAuthenticated }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
+    
     const handleSignIn = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -31,10 +28,11 @@ const SignInPage = ({ setIsAuthenticated }) => {
             if (response.status === 200) {
                 setIsAuthenticated(true);
                 localStorage.setItem('token', response.data.access_token); // Save the token
-                navigate('/diagnosis');
+                navigate('/');
             }
         } catch (error) {
-            setMessage('Incorrect email or password');
+            console.error("Error during sign in:", error); // Log error to console
+            setMessage('An error occurred during sign in.');
         } finally {
             setIsLoading(false);
         }
@@ -47,16 +45,17 @@ const SignInPage = ({ setIsAuthenticated }) => {
                 <LoadingSpinner /> {/* Use LoadingSpinner here */}
                 
                 <div className="infield">
-                    <input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                     <label></label>
                 </div>
                 <div className="infield">
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                     <label></label>
                 </div>
-                <button type="submit" className="forgot">DaemonSet입니다. 환영합니다.</button>
+                <h3>DaemonSet입니다. 환영합니다.</h3>
                 <button type="submit">Sign In</button>
                 {message && <p>{message}</p>}
+                <div className='SU_button'><Link to="/signup">Sign Up</Link></div>
             </form>
         </div>
     );

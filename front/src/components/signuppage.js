@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../App.css';
 import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinner
 import axios from 'axios';
@@ -11,6 +12,8 @@ const SignUpPage = () => {
     const [isPasswordMatch, setIsPasswordMatch] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
+
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -39,8 +42,10 @@ const SignUpPage = () => {
                 password: password,
                 re_password: confirmPassword
             });
-
-            setMessage(response.data.msg);
+            if (response.status === 200) {
+                setMessage(response.data.msg);
+                navigate('/signin');        
+            }
         } catch (error) {
             setMessage('Error occurred during signup');
         } finally {
@@ -88,6 +93,7 @@ const SignUpPage = () => {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                     />
+                    {!isPasswordMatch && <span className="error">  X</span>}
                     {isPasswordMatch && <span className="checkmark">✔️</span>}
                     <label></label>
                 </div>

@@ -47,3 +47,7 @@ button.forgot {
 button.forgot:hover {
     color: #080808;
 }
+
+.form-container .SU_button {
+    padding-top: 10px;
+}

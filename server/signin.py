@@ -39,7 +39,7 @@ def signin():
         print(f"Access Token: {access_token}")  # Debug print
         return jsonify({"msg": "!! Login Success !!", "username": user['username'], "access_token": access_token})
     else:
-        return jsonify({"msg": "Incorrect email or password"}), 401
+        return jsonify({"msg": "Incorrect email or password!!"}), 401
 
 # 보호된 경로 예시
 @app.route('/protected', methods=['GET'])
