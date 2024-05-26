@@ -6,7 +6,7 @@ import './components/DefaultPage.css';
 import './components/SignInPage.css';
 import './components/SignUpPage.css';
 import './components/DiagnosisPage.css';
-import DefaultPage from './components/DefaultPage';
+import DefaultPage from './components/DefaultPage'; 
 import SignInPage from './components/SignInPage';
 import SignUpPage from './components/SignUpPage';
 import DiagnosisPage from './components/DiagnosisPage';

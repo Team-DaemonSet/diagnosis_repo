@@ -20,7 +20,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={handleSignIn}>
-                <h1>Sign in 😈</h1>
+                <h1>Sign in 😈😈</h1>
                 <LoadingSpinner /> {/* Use LoadingSpinner here */}
                 
                 <div className="infield">

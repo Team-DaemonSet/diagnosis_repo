@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #ffffff; /* 흰색 배경 */
   color: #333333; /* 글자 색상 변경 */
-}
+} 
 
 .container {
   display: flex;

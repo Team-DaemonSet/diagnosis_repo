@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinner
-import axios from 'axios';
+import axios from 'axios'; 
 
 const SignUpPage = () => {
     const [username, setUsername] = useState('');
@@ -51,7 +51,7 @@ const SignUpPage = () => {
     return (
         <div className="form-container sign-up-container">
             <form onSubmit={handleSubmit}>
-                <h1>Create Account</h1>
+                <h1>Create Account 😈😈</h1>
                 {<LoadingSpinner />}
                 <span>or use your email for registration</span>
                 <div className="infield">
