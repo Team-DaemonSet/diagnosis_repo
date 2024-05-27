@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../App.css';
+import './DefaultPage.css';
 
 const AuthButton = ({ onClick }) => {
     return (
@@ -22,19 +22,33 @@ const DefaultPage = ({ isAuthenticated, setIsAuthenticated }) => {
 
     return (
         <div className="default-page">
-            <div className='link'>
-                <Link to="/diagnosis">Diagnosis</Link>
+            <div className='content'>
+                <h1>DaemonSet Diagnosis</h1>
+                <p>비대면 피부질환 AI 진단 서비스</p>
+                <div className='buttons'>
+                    <Link to="/diagnosis" className='btn btn-diagnosis'>
+                        <span>바로<br/>진단</span>
+                        <i className="icon-stethoscope"></i>
+                    </Link>
+                    <Link to="/history" className="btn btn-records">
+                        <span>진단<br/>기록</span>
+                        <i className="icon-clipboard"></i>
+                    </Link>
+                    <Link to="/appointment" className="btn btn-appointment">
+                        <span>병원<br/>예약</span>
+                        <i className="icon-calendar"></i>
+                    </Link>
                 {isAuthenticated ? (
                     <>
                         <AuthButton onClick={handleSignOut} />
                     </>
                 ) : (
                     <>
-                        <Link to="/signin">로그인 (Sign In)</Link>
+                        <Link to="/signin" className='btn btn-login'>로그인</Link>
                     </>
                 )}
+                </div>
             </div>
-            <h1>기본 페이지입니다.<hr></hr>기본 페이지라고 말했습니다.</h1>
         </div>
     );
 };

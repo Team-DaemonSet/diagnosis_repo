@@ -1,29 +1,113 @@
-.default-page {
-    text-align: center;
-    /* 상단 여백 추가 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.default-page .link {
-    position: absolute;
-    top: 20px;
-    right: 20px; /* 오른쪽 상단에 위치 */
-    display: flex;
-    gap: 10px;
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
 }
 
-.default-page .link a {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #1e90ff; /* 파란색 배경 */
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
+a {
     text-decoration: none;
-    transition: background-color 0.3s ease;
 }
 
-.default-page .link a:hover {
-    background-color: #007bff; /* 파란색 호버 배경 변경 */
+
+
+.content {
+    text-align: center;
 }
 
+.content h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 80px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.btn span {
+    font-size: 16px;
+}
+
+.btn i {
+    font-size: 24px;
+    position: absolute;
+    bottom: 10px;
+}
+
+.btn-diagnosis {
+    background-color: #a3cfd9;
+}
+
+.btn-diagnosis:hover {
+    background-color: #89b9c5;
+}
+
+.btn-records {
+    background-color: #f9f9b6;
+    color: #333;
+}
+
+.btn-records:hover {
+    background-color: #e0e0a2;
+}
+
+.btn-appointment {
+    background-color: #d6c3a1;
+}
+
+.btn-appointment:hover {
+    background-color: #c2b092;
+}
+
+.btn-login {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    background-color: #000;
+    margin-top: 10px;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #333;
+}
+
+/* Remove focus outline */
+.btn:focus,
+.btn:active,
+.btn-login:focus,
+.btn-login:active {
+    outline: none;
+    box-shadow: none;
+}

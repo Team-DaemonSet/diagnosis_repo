@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
 
+
 const DiagnosisPage = () => {
     const [file, setFile] = useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
@@ -59,6 +60,7 @@ const DiagnosisPage = () => {
             setDiagnosis(interpretation.Diagnosis);
             const { Diagnosis, ...classProbs } = interpretation;  // Diagnosis를 제외한 나머지 데이터
             setResult(JSON.stringify(classProbs, null, 2)); // JSON 문자열로 변환
+            
         } catch (error) {
             console.error('Upload error', error);
             alert('업로드 실패!');

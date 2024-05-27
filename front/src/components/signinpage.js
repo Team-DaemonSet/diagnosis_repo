@@ -52,7 +52,6 @@ const SignInPage = ({ setIsAuthenticated }) => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                     <label></label>
                 </div>
-                <h3>DaemonSet입니다. 환영합니다.</h3>
                 <button type="submit">Sign In</button>
                 {message && <p>{message}</p>}
                 <div className='SU_button'><Link to="/signup">Sign Up</Link></div>
