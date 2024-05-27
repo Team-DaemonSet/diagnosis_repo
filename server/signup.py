@@ -9,10 +9,10 @@ CORS(app)  # Enable CORS for all routes
 
 ############# Database #################
 app.secret_key = 'TeamDaemonSet'
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'dd-db.c7e8iuqi6hn4.ap-northeast-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'test123'
-app.config['MYSQL_DB'] = 'login'
+app.config['MYSQL_PASSWORD'] = 'test1234'
+app.config['MYSQL_DB'] = 'DaemonSet'
 mysql = MySQL(app)
 
 @app.route('/signup', methods=['POST'])
