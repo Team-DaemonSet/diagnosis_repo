@@ -1,4 +1,3 @@
-# model_serving_service.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import onnxruntime as ort
@@ -8,10 +7,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# 현재 파일의 디렉토리 경로를 구합니다.
-base_dir = os.path.dirname(os.path.abspath(__file__))
-# 모델 파일의 상대 경로를 설정합니다.
-model_path = os.path.join(base_dir, 'model', 'NIADerma_33cls.onnx')
+# 모델 파일의 경로 설정
+model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'model', 'NIADerma_33cls.onnx')
 session = ort.InferenceSession(model_path)
 
 @app.route('/predict', methods=['POST'])
@@ -26,4 +23,4 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(port=5003)
+    app.run(port=5005)

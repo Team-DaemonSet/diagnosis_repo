@@ -1,4 +1,3 @@
-# result_interpretation_service.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
@@ -8,13 +7,17 @@ CORS(app)
 
 @app.route('/interpret', methods=['POST'])
 def interpret():
-    data = request.get_json()
-    outputs = np.array(data['outputs'])
-    results = interpret_results(outputs)
-    return jsonify(results), 200
+    try:
+        data = request.get_json()
+        if 'outputs' not in data:
+            return jsonify({"error": "No outputs provided"}), 400
+        outputs = np.array(data['outputs'])
+        results = interpret_results(outputs)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 def interpret_results(outputs):
-    # 클래스별 진단명 설정
     diagnosis_names = {
         1: "정상", 2: "건선", 3: "광선 각화증",
         4: "기저 세포암", 5: "남성형 탈모", 6: "두드러기",
@@ -34,18 +37,15 @@ def interpret_results(outputs):
     exp_scores = np.exp(scores)
     probs = exp_scores / np.sum(exp_scores) * 100
 
-    # 결과 딕셔너리 생성
     results = {f"Class {i}": f"{prob:.4f}%" for i, prob in enumerate(probs, start=1)}
 
-    # 가장 높은 확률 찾기
     max_index = np.argmax(probs)
     max_probability = probs[max_index]
-    max_diagnosis = diagnosis_names[max_index + 1]  # 클래스 인덱스에 맞게 진단명 매핑
+    max_diagnosis = diagnosis_names[max_index + 1]
 
-    # 최종 진단명과 확률 추가
     results['Diagnosis'] = f"{max_probability:.2f}% 확률로 '{max_diagnosis}'입니다"
 
     return results
 
 if __name__ == '__main__':
-    app.run(port=5004)
+    app.run(port=5006)
