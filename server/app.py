@@ -6,6 +6,8 @@ if __name__ == "__main__":
         "image_preprocessing_service.py",
         "model_serving_service.py",
         "result_interpretation_service.py",
+        "preprocessing_trigger_service.py",
+        "database_service.py",
         "signin.py",
         "signup.py"
     ]

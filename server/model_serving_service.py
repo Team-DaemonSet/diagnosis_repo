@@ -1,4 +1,3 @@
-# model_serving_service.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import onnxruntime as ort
@@ -18,12 +17,18 @@ session = ort.InferenceSession(model_path)
 def predict():
     data = request.get_json()
     preprocessed_path = data['preprocessed_path']
+    print("Received preprocessed path:", preprocessed_path)  # 로그에 경로 출력
     try:
-        input_image = np.load(preprocessed_path + '.npy')
+        if not os.path.exists(preprocessed_path):
+            raise FileNotFoundError(f"File not found: {preprocessed_path}")
+        input_image = np.load(preprocessed_path)
+        print("Loaded input image shape:", input_image.shape)  # 입력 이미지의 형상 출력
         outputs = session.run(None, {'input': input_image})
+        print("Model outputs:", outputs)  # 모델 출력 로그
         return jsonify({"outputs": outputs[0].tolist()}), 200
     except Exception as e:
+        print("Error during prediction:", str(e))  # 로그에 에러 출력
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(port=5003)
+    app.run(port=5005)

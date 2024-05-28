@@ -8,10 +8,15 @@ CORS(app)
 
 @app.route('/interpret', methods=['POST'])
 def interpret():
-    data = request.get_json()
-    outputs = np.array(data['outputs'])
-    results = interpret_results(outputs)
-    return jsonify(results), 200
+    try:
+        data = request.get_json()
+        if 'outputs' not in data:
+            return jsonify({"error": "No outputs provided"}), 400
+        outputs = np.array(data['outputs'])
+        results = interpret_results(outputs)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 def interpret_results(outputs):
     # 클래스별 진단명 설정
@@ -70,4 +75,4 @@ def interpret_results(outputs):
     return results
 
 if __name__ == '__main__':
-    app.run(port=5004)
+    app.run(port=5006)

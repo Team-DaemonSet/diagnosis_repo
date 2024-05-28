@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
+
 const DiagnosisPage = () => {
     const [file, setFile] = useState(null);
+    const [email, setEmail] = useState('');
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [result, setResult] = useState('');
     const [chartData, setChartData] = useState(null); // 차트 데이터를 위한 상태 추가
-    
+
+    useEffect(() => {
+        const fetchUserEmail = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const response = await axios.get('http://localhost:5012/protected', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    setEmail(response.data.logged_in_as.email);
+                } catch (error) {
+                    console.error('Error fetching user email', error);
+                }
+            }
+        };
+        fetchUserEmail();
+    }, []);
+
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile);
@@ -30,39 +51,64 @@ const DiagnosisPage = () => {
 
         const formData = new FormData();
         formData.append('file', file);
+        formData.append('email', email);
 
         try {
-            // Step 1: 파일 업로드
+            const token = localStorage.getItem('token');
+
             const uploadResponse = await axios.post('http://localhost:5001/upload', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`
                 }
             });
             const { file_path } = uploadResponse.data;
+            console.log("Uploaded file path:", file_path);
 
-            // Step 2: 이미지 전처리
-            const preprocessResponse = await axios.post('http://localhost:5002/preprocess', {
+            const preprocessResponse = await axios.post('http://localhost:5003/preprocess', {
                 file_path: file_path
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
             });
             const { preprocessed_path } = preprocessResponse.data;
 
-            // Step 3: 모델 예측
-            const predictResponse = await axios.post('http://localhost:5003/predict', {
+            const predictResponse = await axios.post('http://localhost:5005/predict', {
                 preprocessed_path: preprocessed_path
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
             });
             const { outputs } = predictResponse.data;
 
-            // Step 4: 결과 해석
-            const interpretResponse = await axios.post('http://localhost:5004/interpret', {
+            const interpretResponse = await axios.post('http://localhost:5006/interpret', {
                 outputs: outputs
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
             });
             const interpretation = interpretResponse.data;
 
-            // 진단 결과와 클래스 확률을 별도로 저장
+            await axios.post('http://localhost:5002/save', {
+                email: email,
+                s3_url: file_path
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
             setDiagnosis(interpretation.Diagnosis);
             const { Diagnosis, "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2, Others } = interpretation;
-            setResult(JSON.stringify({ "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2 }, null, 2)); 
-            
+            setResult(JSON.stringify({ "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2 }, null, 2));
+
             // 차트 데이터를 설정
             const otherTotal = Others.reduce((acc, item) => acc + parseFloat(item.Probability), 0);
             const chartLabels = [top1.Name, top2.Name, 'Others'];
@@ -90,10 +136,9 @@ const DiagnosisPage = () => {
             };
             setChartData(chartData);
 
-
         } catch (error) {
             console.error('Upload error', error);
-            alert('업로드 실패!');
+            alert('업로드 실패! 오류 메시지를 콘솔에서 확인하세요.');
         }
     };
 
