@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
-
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 const DiagnosisPage = () => {
     const [file, setFile] = useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [result, setResult] = useState('');
-
+    const [chartData, setChartData] = useState(null); // 차트 데이터를 위한 상태 추가
+    
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile);
@@ -58,14 +60,44 @@ const DiagnosisPage = () => {
 
             // 진단 결과와 클래스 확률을 별도로 저장
             setDiagnosis(interpretation.Diagnosis);
-            const { Diagnosis, ...classProbs } = interpretation;  // Diagnosis를 제외한 나머지 데이터
-            setResult(JSON.stringify(classProbs, null, 2)); // JSON 문자열로 변환
+            const { Diagnosis, "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2, Others } = interpretation;
+            setResult(JSON.stringify({ "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2 }, null, 2)); 
             
+            // 차트 데이터를 설정
+            const otherTotal = Others.reduce((acc, item) => acc + parseFloat(item.Probability), 0);
+            const chartLabels = [top1.Name, top2.Name, 'Others'];
+            const chartValues = [parseFloat(top1.Probability), parseFloat(top2.Probability), otherTotal];
+
+            const chartData = {
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: 'Diagnosis Probabilities',
+                        data: chartValues,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            };
+            setChartData(chartData);
+
+
         } catch (error) {
             console.error('Upload error', error);
             alert('업로드 실패!');
         }
     };
+
+    ChartJS.register(ArcElement, Tooltip, Legend);
 
     return (
         <div>
@@ -80,6 +112,7 @@ const DiagnosisPage = () => {
                 <h3>Results:</h3>
                 <p>{diagnosis}</p>
                 <pre>{result}</pre>
+                {chartData && <Pie data={chartData} />}
             </div>
         </div>
     );

@@ -35,15 +35,37 @@ def interpret_results(outputs):
     probs = exp_scores / np.sum(exp_scores) * 100
 
     # 결과 딕셔너리 생성
-    results = {f"Class {i}": f"{prob:.4f}%" for i, prob in enumerate(probs, start=1)}
+    # 상위 두 개의 진단명을 찾기 위한 정렬
+    sorted_indices = np.argsort(probs)[::-1]  # 내림차순 정렬
+    top1_index = sorted_indices[0]
+    top2_index = sorted_indices[1]
 
-    # 가장 높은 확률 찾기
-    max_index = np.argmax(probs)
-    max_probability = probs[max_index]
-    max_diagnosis = diagnosis_names[max_index + 1]  # 클래스 인덱스에 맞게 진단명 매핑
+    top1_prob = probs[top1_index]
+    top2_prob = probs[top2_index]
+    top1_diagnosis = diagnosis_names[top1_index + 1]
+    top2_diagnosis = diagnosis_names[top2_index + 1]
 
-    # 최종 진단명과 확률 추가
-    results['Diagnosis'] = f"{max_probability:.2f}% 확률로 '{max_diagnosis}'입니다"
+    # 결과 딕셔너리 생성
+    results = {
+        "Top 1 Diagnosis": {
+            "Name": top1_diagnosis,
+            "Probability": f"{top1_prob:.2f}%"
+        },
+        "Top 2 Diagnosis": {
+            "Name": top2_diagnosis,
+            "Probability": f"{top2_prob:.2f}%"
+        },
+        "Others": []
+    }
+
+    # 나머지 31개의 진단명을 기타에 저장
+    for i in sorted_indices[2:]:
+        diagnosis_name = diagnosis_names[i + 1]
+        prob = probs[i]
+        results["Others"].append({
+            "Name": diagnosis_name,
+            "Probability": f"{prob:.4f}%"
+        })
 
     return results
 
