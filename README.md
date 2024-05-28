@@ -1,6 +1,6 @@
 # diagnosis_repo
 
-성욱
+성욱입니다!
 
 5월 29일 아침 기준 main에 지금까지 코드 push 해놨습니다.
 
