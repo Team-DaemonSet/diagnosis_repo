@@ -20,15 +20,14 @@ def upload_file():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
     file = request.files['file']
-    email = request.form.get('email', 'default@example.com')  # 임시 기본 이메일 주소 사용
-    #email = request.form['email']
+    email = request.form.get('email', 'chris4929@naver.com')  # 임시 기본 이메일 주소 사용
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
     if file:
         filename = secure_filename(file.filename)
         s3_client.upload_fileobj(file, UPLOAD_BUCKET, filename)
         s3_url = f"https://{UPLOAD_BUCKET}.s3.amazonaws.com/{filename}"
-        return jsonify({"email": email, "s3_url": s3_url}), 201
+        return jsonify({"email": email, "file_path": s3_url}), 201
 
 if __name__ == '__main__':
     app.run(port=5001)
