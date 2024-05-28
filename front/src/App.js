@@ -1,9 +1,8 @@
-import React, { useState, useEffect  } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate  } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
-import './App.css';
 import { jwtDecode } from 'jwt-decode';
-
+import './App.css';
 
 import './components/DefaultPage.css';
 import './components/SignInPage.css';
@@ -15,7 +14,7 @@ import SignUpPage from './components/SignUpPage';
 import DiagnosisPage from './components/DiagnosisPage';
 import HistoryPage from './components/HistoryPage';
 import AppointmentPage from './components/AppointmentPage';
-
+import TokenExpiration from './components/TokenExpiration'; // 새로운 컴포넌트 추가
 
 const getTokenExpiration = (token) => {
   const decodedToken = jwtDecode(token);
@@ -29,47 +28,34 @@ const getTokenExpiration = (token) => {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState(''); 
-  const [expiration, setExpiration] = useState(null);
+  const [username, setUsername] = useState('');
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const fetchUserEmail = async () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-
-            const remainingTime = getTokenExpiration(token);
-            setExpiration(remainingTime);
-            
-            try {
-                const response = await axios.get('http://localhost:5012/protected', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setUsername(response.data.logged_in_as.username);
-            } catch (error) {
-                console.error('Error', error);
-                alert('Error');
-            }
-        } else {
-            alert('No token found, please log in.');
-        }
-    };
-    fetchUserEmail();
-
-    // Update expiration time every second
-    const interval = setInterval(() => {
       const token = localStorage.getItem('token');
       if (token) {
         const remainingTime = getTokenExpiration(token);
-        setExpiration(remainingTime);
+        setToken(token);
+
+        try {
+          const response = await axios.get('http://localhost:5012/protected', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          setUsername(response.data.logged_in_as.username);
+          setIsAuthenticated(true);
+        } catch (error) {
+          console.error('Error', error);
+          alert('Error');
+        }
+      } else {
+        alert('Logout');
       }
-    }, 1000);
-
-    // Clear interval on component unmount
-    return () => clearInterval(interval);
-}, []);
-
+    };
+    fetchUserEmail();
+  }, [isAuthenticated]);
 
   const ProtectedRoute = ({ children }) => {
     useEffect(() => {
@@ -89,9 +75,7 @@ function App() {
         </div>
         <div className="user-info">
           {isAuthenticated && <p>안녕하세요, {username} 님😈</p>}
-        </div>
-        <div className="tokentime">
-          {expiration && (<p>{expiration.minutes} : {expiration.seconds}</p>)}
+          {isAuthenticated && token && <TokenExpiration token={token} />}
         </div>
         <Routes>
           <Route path="/" element={<DefaultPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />

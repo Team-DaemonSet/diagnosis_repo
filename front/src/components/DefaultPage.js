@@ -12,12 +12,9 @@ const DefaultPage = ({ isAuthenticated, setIsAuthenticated }) => {
     const navigate = useNavigate();
 
     const handleSignOut = () => {
+        localStorage.removeItem('token');
         setIsAuthenticated(false);
         navigate('/signin');
-    };
-
-    const lc = () => {
-        localStorage.clear();
     };
 
     return (
