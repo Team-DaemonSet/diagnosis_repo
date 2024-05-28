@@ -11,7 +11,7 @@
 3. git init
 4. git remote add origin https://github.com/Team-DaemonSet/diagnosis_repo.git
 5. git checkout -b {본인 branch명}
---> Switched to a new branch '본인 branch 명' 이라고 뜨는지 확인
+--> Switched to a new branch '{본인 branch명}' 이라고 뜨는지 확인
 6. git pull origin main
 
 <Terminal 2개 더 틀고>
