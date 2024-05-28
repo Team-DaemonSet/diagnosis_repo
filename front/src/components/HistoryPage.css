@@ -1,0 +1,24 @@
+#records ul {
+    list-style-type: none; /* 리스트 스타일 제거 */
+    padding: 0; /* 리스트 내부 패딩 제거 */
+}
+
+#records li {
+    margin-bottom: 20px; /* 리스트 간격 설정 */
+}
+
+h1 {
+    margin-bottom: 50px;
+}
+
+.full {
+    margin-left: 10px;
+    background-color: #4CAF50; /* Green background */
+    border: none; 
+    color: white;
+    text-align: center; 
+    text-decoration: none; 
+    font-size: 15px; 
+    cursor: pointer;
+    border-radius: 8px; 
+}

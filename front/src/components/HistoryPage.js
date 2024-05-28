@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../App.css';
+import './HistoryPage.css';
 
 const HistoryPage = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [records, setRecords] = useState([]);
+    const [expandedItem, setExpandedItem] = useState(null);
 
     useEffect(() => {
         const fetchUserEmail = async () => {
@@ -46,6 +47,19 @@ const HistoryPage = () => {
         }
     };
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return date.toLocaleString();
+    };
+
+    const handleItemClick = (index) => {
+        if (expandedItem === index) {
+            setExpandedItem(null);
+        } else {
+            setExpandedItem(index);
+        }
+    };
+
     return (
         <div>
             <h1>{username && `${username} 님의 진단기록`}</h1>
@@ -53,15 +67,20 @@ const HistoryPage = () => {
                 {records.length === 0 ? (
                     <p>No records found</p>
                 ) : (
-                    <ul>
+                    <ol>
                         {records.map((record, index) => (
-                            <li key={index}>
-                                날짜: {record.diagnosis_date}
-                                <br />
-                                <img src={record.image_url} alt="User uploaded" style={{ width: '100px', height: '100px' }} />
+                            <li key={index} >
+                                날짜: {formatDate(record.diagnosis_date)}
+                                <button className='full'  onClick={() => handleItemClick(index)}>[펼쳐보기]</button>
+                                {expandedItem === index && (
+                                    <div>
+                                        <br />
+                                        <img src={record.image_url} alt="User uploaded" style={{ width: '100px', height: '100px' }} />
+                                    </div>
+                                )}
                             </li>
                         ))}
-                    </ul>
+                    </ol>
                 )}
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinneraa
 import axios from 'axios';

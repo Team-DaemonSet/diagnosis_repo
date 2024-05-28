@@ -53,3 +53,20 @@ body {
 .nav-links a:hover {
   background-color: #007bff; /* 파란색 호버 배경 변경 */
 }
+
+.user-info {
+  position: fixed;
+  top: 10px; 
+  right: 150px; 
+  z-index: 1000; 
+}
+
+.tokentime {
+  margin-top: 3px;
+  position: fixed;
+  top: 10px; 
+  right: 90px; 
+  z-index: 1000; 
+}
+
+
