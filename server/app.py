@@ -8,6 +8,7 @@ if __name__ == "__main__":
         "result_interpretation_service.py",
         "preprocessing_trigger_service.py",
         "database_service.py",
+        "history.py",
         "signin.py",
         "signup.py"
     ]
