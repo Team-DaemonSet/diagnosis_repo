@@ -48,10 +48,9 @@ function App() {
           setIsAuthenticated(true);
         } catch (error) {
           console.error('Error', error);
-          alert('Error');
         }
       } else {
-        alert('Logout');
+        console.log('no token');
       }
     };
     fetchUserEmail();
