@@ -38,12 +38,13 @@ def records():
     records = get_user_records(email)
     
     # URL을 만들기 위한 코드 추가
-    for record in records:
-        record['image_url'] = s3_client.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': 'uploadimage-bucket', 'Key': record['image_url']},
-            ExpiresIn=3600
-        )
+    
+    #for record in records:
+    #    record['image_url'] = s3_client.generate_presigned_url(
+    #        'get_object',
+    #        Params={'Bucket': 'uploadimage-bucket', 'Key': record['image_url']},
+    #        ExpiresIn=3600
+    #    )
     
     return jsonify(records), 200
 

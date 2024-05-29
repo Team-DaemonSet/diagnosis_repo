@@ -46,7 +46,7 @@ function App() {
           });
           setUsername(response.data.logged_in_as.username);
           setIsAuthenticated(true);
-        } catch (error) {
+        } catch (error) { 
           console.error('Error', error);
         }
       } else {
