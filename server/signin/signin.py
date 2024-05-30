@@ -6,7 +6,10 @@ from flask_cors import CORS
 import datetime
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
+
+# 특정 도메인만 허용
+CORS(app, resources={r"/*": {"origins": "http://webapp-service"}})
 
 ############# Database #################
 app.secret_key = 'TeamDaemonSet'
