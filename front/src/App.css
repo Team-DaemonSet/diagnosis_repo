@@ -1,8 +1,11 @@
+
+/*login button */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #ffffff; /* 흰색 배경 */
-  color: #333333; /* 글자 색상 변경 */
+  background-color: #f0f0f0; 
+  color: #000000; /* 기본 글자 색상 변경 */
 }
 
 .container {
@@ -26,7 +29,7 @@ body {
 .daemonset-logo {
   font-size: 24px;
   font-weight: bold;
-  color: #1e90ff;
+  color: #333333;
   text-decoration: none;
 }
 
@@ -42,7 +45,7 @@ body {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #1e90ff; /* 파란색 배경 */
+  background-color: #ffffff;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -54,19 +57,16 @@ body {
   background-color: #007bff; /* 파란색 호버 배경 변경 */
 }
 
+.user-info-wrapper {
+  position: fixed;
+  top: 10px; 
+  right: 10px; 
+  z-index: 1000; 
+  display: flex;
+  align-items: center;
+}
+
 .user-info {
-  position: fixed;
-  top: 10px; 
-  right: 150px; 
-  z-index: 1000; 
+  margin-right: 10px; 
 }
-
-.tokentime {
-  margin-top: 3px;
-  position: fixed;
-  top: 10px; 
-  right: 90px; 
-  z-index: 1000; 
-}
-
 

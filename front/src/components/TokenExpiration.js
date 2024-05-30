@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import  {jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // 올바르게 import
 
 const getTokenExpiration = (token) => {
-  const decodedToken = jwtDecode(token);
-  const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
+  const decodedToken = jwtDecode(token); // 올바른 함수 사용
+  const expirationTime = decodedToken.exp * 1000; // 밀리초로 변환
   const currentTime = Date.now();
   const remainingTime = expirationTime - currentTime;
-  const remainingMinutes = Math.floor(remainingTime / 1000 / 60); // Convert milliseconds to minutes
-  const remainingSeconds = Math.floor((remainingTime / 1000) % 60); // Get remaining seconds
+  const remainingMinutes = Math.floor(remainingTime / 1000 / 60); // 밀리초를 분으로 변환
+  const remainingSeconds = Math.floor((remainingTime / 1000) % 60); // 남은 초 계산
   return { minutes: remainingMinutes, seconds: remainingSeconds };
 };
 
@@ -23,7 +23,7 @@ const TokenExpiration = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="tokentime">
+    <div className="token-expiration">
       {expiration && <p>{expiration.minutes} : {expiration.seconds}</p>}
     </div>
   );

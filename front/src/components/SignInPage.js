@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
-import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinneraa
+import './SignInPage.css'; // SignInPage.css 파일을 임포트
+import LoadingSpinner from './LoadingSpinner'; // LoadingSpinner를 import
 import axios from 'axios';
 
 const SignInPage = ({ setIsAuthenticated }) => {
@@ -27,12 +28,12 @@ const SignInPage = ({ setIsAuthenticated }) => {
             setMessage(response.data.msg);
             if (response.status === 200) {
                 setIsAuthenticated(true);
-                localStorage.setItem('token', response.data.access_token); // Save the token
+                localStorage.setItem('token', response.data.access_token); // 토큰 저장
                 navigate('/');
             }
         } catch (error) {
-            console.error("Error during sign in:", error); // Log error to console
-            setMessage('An error occurred during sign in.');
+            console.error("로그인 중 에러 발생:", error); // 콘솔에 에러 로그 출력
+            setMessage('로그인 중 에러가 발생했습니다.');
         } finally {
             setIsLoading(false);
         }
@@ -41,21 +42,27 @@ const SignInPage = ({ setIsAuthenticated }) => {
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={handleSignIn}>
-                <h1>Sign in 😈</h1>
-                <LoadingSpinner /> {/* Use LoadingSpinner here */}
-                
+                <h1 className="centered">Diagnosis</h1>
+                <hr className="divider" />
+                <h2 className="centered">Sign in</h2>
+                <p className="centered">회원가입 하신 이메일 주소를 입력해 주세요.</p>
                 <div className="infield">
-                    <input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                    <label></label>
+                    <input type="email" placeholder="email@daemonset.com" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
                 <div className="infield">
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                    <label></label>
                 </div>
-                <button type="submit">Sign In</button>
+                <button type="submit" className="sign-in-button">Sign In</button> {/* 클래스 추가 */}
+                <button type="submit" className="sign-in-button">Sign Up</button>
+        
+                <div className="social-login">
+                    <button className="social-btn google"></button>
+                    <button className="social-btn kakao"></button>
+                    <button className="social-btn naver"></button>
+                </div>
                 {message && <p>{message}</p>}
-                <div className='SU_button'><Link to="/signup">Sign Up</Link></div>
             </form>
+            {isLoading && <LoadingSpinner />} {/* 로딩 중일 때 LoadingSpinner 표시 */}
         </div>
     );
 };
