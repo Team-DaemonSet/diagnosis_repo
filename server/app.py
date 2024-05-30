@@ -2,15 +2,15 @@ import subprocess
 
 if __name__ == "__main__":
     services = [
-        "file_upload_service.py",
-        "image_preprocessing_service.py",
-        "model_serving_service.py",
-        "result_interpretation_service.py",
+        "./file_upload/file_upload_service.py",
+        "./image_preprocess/image_preprocessing_service.py",
+        "./modelserving/model_serving_service.py",
+        "./result_interpret/result_interpretation_service.py",
         "preprocessing_trigger_service.py",
-        "database_service.py",
-        "history.py",
-        "signin.py",
-        "signup.py"
+        "./database_service/database_service.py",
+        "./history/history.py",
+        "./signin/signin.py",
+        "./signup/signup.py"
     ]
     
     processes = []
