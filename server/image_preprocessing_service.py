@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 import boto3
+=======
+# image_preprocessing_service.py
+>>>>>>> 5f6bff1a0006cb7c321fc6095ca776f188322a19
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from PIL import Image
 import numpy as np
 import os
+<<<<<<< HEAD
 from io import BytesIO
+=======
+>>>>>>> 5f6bff1a0006cb7c321fc6095ca776f188322a19
 
 app = Flask(__name__)
 CORS(app)
 
+<<<<<<< HEAD
 s3_client = boto3.client(
     's3',
     aws_access_key_id='AKIA47CR2RIJTJZY367M',
@@ -53,6 +61,23 @@ def preprocess_image():
         return jsonify({"error": str(e)}), 500
 
 def preprocess_image_data(image):
+=======
+@app.route('/preprocess', methods=['POST'])
+def preprocess_image():
+    data = request.get_json()
+    file_path = data['file_path']
+    try:
+        image = Image.open(file_path)
+        input_image = preprocess_image(image)
+        preprocessed_path = file_path.replace('uploads', 'preprocessed')
+        os.makedirs(os.path.dirname(preprocessed_path), exist_ok=True)
+        np.save(preprocessed_path, input_image)
+        return jsonify({"preprocessed_path": preprocessed_path}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+def preprocess_image(image):
+>>>>>>> 5f6bff1a0006cb7c321fc6095ca776f188322a19
     input_image = image.resize((256, 256))
     input_image = np.array(input_image).astype(np.float32) / 255.0
     input_image = np.transpose(input_image, (2, 0, 1))[:3, :, :]
@@ -60,4 +85,8 @@ def preprocess_image_data(image):
     return input_image
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(port=5003)
+=======
+    app.run(port=5002)
+>>>>>>> 5f6bff1a0006cb7c321fc6095ca776f188322a19

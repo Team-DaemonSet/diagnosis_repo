@@ -83,7 +83,9 @@ const DiagnosisPage = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            const { outputs } = predictResponse.data;
+
+            const { outputs } = predictResponse.data; 
+
 
             const interpretResponse = await axios.post('http://localhost:5006/interpret', {
                 outputs: outputs
