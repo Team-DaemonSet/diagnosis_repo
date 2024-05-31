@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
-import LoadingSpinner from './LoadingSpinner'; // Import the LoadingSpinneraa
+import './SignUpPage.css';
+import LoadingSpinner from './LoadingSpinner'; // LoadingSpinner를 import
 import axios from 'axios';
 
 const SignUpPage = () => {
@@ -13,7 +14,7 @@ const SignUpPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
 
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); // useNavigate 초기화
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -56,9 +57,9 @@ const SignUpPage = () => {
     return (
         <div className="form-container sign-up-container">
             <form onSubmit={handleSubmit}>
-                <h1>Create Account</h1>
+                <h1>회원가입</h1>
                 {<LoadingSpinner />}
-                <span>or use your email for registration</span>
+                <span className="description-text">회원가입을 위한 <br /> 이름, 이메일, 비밀번호를 설정해 주세요.</span>
                 <div className="infield">
                     <input 
                         type="text" 
@@ -97,10 +98,11 @@ const SignUpPage = () => {
                     {isPasswordMatch && <span className="checkmark">✔️</span>}
                     <label></label>
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit" className="signup-button">Sign Up</button>
                 {message && <p>{message}</p>}
             </form>
         </div>
     );
 };
+
 export default SignUpPage;

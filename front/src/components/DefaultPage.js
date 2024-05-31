@@ -23,7 +23,7 @@ const DefaultPage = ({ isAuthenticated, setIsAuthenticated }) => {
                 <h1>DaemonSet Diagnosis</h1>
                 <p>비대면 피부질환 AI 진단 서비스</p>
                 <div className='buttons'>
-                    <Link to="/diagnosis" className='btn btn-diagnosis'>
+                 <Link to="/diagnosis" className='btn btn-diagnosis'>
                         <span>바로<br/>진단</span>
                         <i className="icon-stethoscope"></i>
                     </Link>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import './SignInPage.css'; // SignInPage.css 파일을 임포트
 import LoadingSpinner from './LoadingSpinner'; // LoadingSpinner를 import
@@ -39,6 +39,10 @@ const SignInPage = ({ setIsAuthenticated }) => {
         }
     };
 
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
+
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={handleSignIn}>
@@ -53,7 +57,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 </div>
                 <button type="submit" className="sign-in-button">Sign In</button> {/* 클래스 추가 */}
-                <button type="submit" className="sign-in-button">Sign Up</button>
+                <button type="button" className="sign-up-button" onClick={handleSignUp}>Sign Up</button>
         
                 <div className="social-login">
                     <button className="social-btn google"></button>
