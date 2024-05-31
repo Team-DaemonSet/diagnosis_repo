@@ -12,10 +12,10 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Flask 애플리케이션을 가리키는 환경 변수 설정
-ENV FLASK_APP=signin.py
+ENV FLASK_APP=signup.py
 
 # 포트 노출
-EXPOSE 5012
+EXPOSE 5011
 
 # 애플리케이션 실행
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5012"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5011"]

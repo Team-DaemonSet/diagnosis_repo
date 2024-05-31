@@ -17,7 +17,7 @@ const SignInPage = ({ setIsAuthenticated }) => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post('http://backend-sercvice-1:5012/signin', {
+            const response = await axios.post('http://www.daemonset.site/signin', {
                 email: email,
                 password: password
             }, {

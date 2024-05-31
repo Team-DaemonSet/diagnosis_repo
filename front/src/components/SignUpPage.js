@@ -36,7 +36,7 @@ const SignUpPage = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5011/signup', {
+            const response = await axios.post('http://www.daemonset.site/signup', {
                 username: username,
                 email: email,
                 password: password,
