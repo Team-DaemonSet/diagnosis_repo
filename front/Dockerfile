@@ -1,4 +1,4 @@
-# 단계 1: 빌드 환경 설정
+# 단계 1: 빌드 환경 설정.
 FROM node:16 as build
 WORKDIR /app
 COPY package.json package-lock.json ./
