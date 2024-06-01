@@ -15,7 +15,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(base_dir, 'model', 'NIADerma_4cls.onnx')
 session = onnxruntime.InferenceSession(model_path)
 
-# ONNX 모델 로드
+# ONNX 모델 로드하기
 session = onnxruntime.InferenceSession(model_path)
 
 @app.route('/upload', methods=['POST'])
