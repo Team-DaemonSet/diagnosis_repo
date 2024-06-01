@@ -1,7 +1,13 @@
 FROM python:3.12-slim
 
+
+# Copy the current directory contents into the container at /app/modelserving
 COPY . /app
+
+# Set the working directory in the container
 WORKDIR /app
+
+
 COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN apt-get update

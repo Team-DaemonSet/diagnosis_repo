@@ -73,8 +73,8 @@ const DiagnosisPage = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            const { preprocessed_path } = preprocessResponse.data;
-
+            const { outputs } = preprocessResponse.data;
+            /*
             const predictResponse = await axios.post('http://www.daemonset.site/predict', {
                 preprocessed_path: preprocessed_path
             }, {
@@ -84,7 +84,8 @@ const DiagnosisPage = () => {
                 }
             });
             const { outputs } = predictResponse.data;
-
+            */
+            
             const interpretResponse = await axios.post('http://www.daemonset.site/interpret', {
                 outputs: outputs
             }, {

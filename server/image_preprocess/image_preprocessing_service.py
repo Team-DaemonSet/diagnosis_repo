@@ -1,6 +1,7 @@
 import boto3
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import onnxruntime as ort
 from PIL import Image
 import numpy as np
 import os
@@ -17,6 +18,19 @@ s3_client = boto3.client(
 )
 
 UPLOAD_BUCKET = 'uploadimage-bucket'
+
+# 현재 파일의 디렉토리 경로를 구합니다.
+base_dir = os.path.dirname(os.path.abspath(__file__))
+# 모델 파일의 상대 경로를 설정합니다.
+model_path = os.path.join(base_dir, 'model', 'NIADerma_33cls.onnx')
+print(f"모델 경로: {model_path}")
+
+try:
+    session = ort.InferenceSession(model_path)
+    print("모델 로드 성공")
+except Exception as e:
+    print(f"모델 로드 실패: {str(e)}")
+
 
 @app.route('/preprocess', methods=['POST'])
 def preprocess_image():
@@ -39,15 +53,9 @@ def preprocess_image():
         image = Image.open(BytesIO(image_data))
         
         input_image = preprocess_image_data(image)
+        outputs = session.run(None, {'input': input_image})
 
-        # /tmp 디렉토리가 존재하는지 확인하고 생성
-        if not os.path.exists('/tmp'):
-            os.makedirs('/tmp')
-        
-        preprocessed_path = f"/tmp/{os.path.basename(file_path)}.npy"
-        np.save(preprocessed_path, input_image)
-        
-        return jsonify({"preprocessed_path": preprocessed_path}), 200
+        return jsonify({"outputs": outputs[0].tolist()}), 200
     except Exception as e:
         print("Error during processing:", str(e))  # 로그에 에러 출력
         return jsonify({"error": str(e)}), 500
