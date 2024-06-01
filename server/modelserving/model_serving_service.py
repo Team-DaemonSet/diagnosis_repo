@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # 현재 파일의 디렉토리 경로를 구합니다.
-base_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 모델 파일의 상대 경로를 설정합니다.
 model_path = os.path.join(base_dir, 'model', 'NIADerma_33cls.onnx')
 session = ort.InferenceSession(model_path)

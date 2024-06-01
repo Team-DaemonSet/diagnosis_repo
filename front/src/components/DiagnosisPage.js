@@ -18,7 +18,7 @@ const DiagnosisPage = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const response = await axios.get('http://localhost:5012/protected', {
+                    const response = await axios.get('http://www.daemonset.site/protected', {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -56,7 +56,7 @@ const DiagnosisPage = () => {
         try {
             const token = localStorage.getItem('token');
 
-            const uploadResponse = await axios.post('http://localhost:5001/upload', formData, {
+            const uploadResponse = await axios.post('http://www.daemonset.site/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`
@@ -65,7 +65,7 @@ const DiagnosisPage = () => {
             const { file_path } = uploadResponse.data;
             console.log("Uploaded file path:", file_path);
 
-            const preprocessResponse = await axios.post('http://localhost:5003/preprocess', {
+            const preprocessResponse = await axios.post('http://www.daemonset.site/preprocess', {
                 file_path: file_path
             }, {
                 headers: {
@@ -75,7 +75,7 @@ const DiagnosisPage = () => {
             });
             const { preprocessed_path } = preprocessResponse.data;
 
-            const predictResponse = await axios.post('http://localhost:5005/predict', {
+            const predictResponse = await axios.post('http://www.daemonset.site/predict', {
                 preprocessed_path: preprocessed_path
             }, {
                 headers: {
@@ -85,7 +85,7 @@ const DiagnosisPage = () => {
             });
             const { outputs } = predictResponse.data;
 
-            const interpretResponse = await axios.post('http://localhost:5006/interpret', {
+            const interpretResponse = await axios.post('http://www.daemonset.site/interpret', {
                 outputs: outputs
             }, {
                 headers: {
@@ -95,7 +95,7 @@ const DiagnosisPage = () => {
             });
             const interpretation = interpretResponse.data;
 
-            await axios.post('http://localhost:5002/save', {
+            await axios.post('http://www.daemonset.site/save', {
                 email: email,
                 s3_url: file_path
             }, {
