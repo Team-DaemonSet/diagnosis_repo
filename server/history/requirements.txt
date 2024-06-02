@@ -23,6 +23,8 @@ numpy==1.26.4
 onnxruntime==1.17.3
 packaging==24.0
 pillow==10.3.0
+prometheus-flask-exporter==0.23.0
+prometheus_client==0.20.0
 protobuf==5.26.1
 PyJWT==2.8.0
 PyMySQL==1.1.1
