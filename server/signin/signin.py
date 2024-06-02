@@ -5,6 +5,10 @@ import MySQLdb.cursors
 from flask_cors import CORS
 import datetime
 
+from random import random
+from time import sleep
+from prometheus_flask_exporter import PrometheusMetrics
+
 app = Flask(__name__)
 CORS(app)
 
@@ -21,8 +25,13 @@ app.config['JWT_SECRET_KEY'] = 'TeamDaemonSet'
 mysql = MySQL(app)
 jwt = JWTManager(app)
 
+#메트릭
+metrics = PrometheusMetrics(app)
+
 # 로그인
 @app.route('/signin', methods=['POST'])
+@metrics.histogram('requests_by_status_and_path', 'Request latencies by status and path', labels={'status': lambda r: r.status_code, 'path': lambda: request.path})
+@metrics.gauge('in_progress', 'Long running requests in progress')
 def signin():
     data = request.get_json()
     email = data.get('email')
