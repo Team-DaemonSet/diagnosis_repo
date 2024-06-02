@@ -18,7 +18,7 @@ const DiagnosisPage = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const response = await axios.get('http://www.daemonset.site/protected', {
+                    const response = await axios.get('http://localhost:5012/protected', {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -56,7 +56,7 @@ const DiagnosisPage = () => {
         try {
             const token = localStorage.getItem('token');
 
-            const uploadResponse = await axios.post('http://www.daemonset.site/upload', formData, {
+            const uploadResponse = await axios.post('http://localhost:5001/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`
@@ -65,7 +65,7 @@ const DiagnosisPage = () => {
             const { file_path } = uploadResponse.data;
             console.log("Uploaded file path:", file_path);
 
-            const preprocessResponse = await axios.post('http://www.daemonset.site/preprocess', {
+            const preprocessResponse = await axios.post('http://localhost:5003/preprocess', {
                 file_path: file_path
             }, {
                 headers: {
@@ -86,7 +86,7 @@ const DiagnosisPage = () => {
             const { outputs } = predictResponse.data;
             */
             
-            const interpretResponse = await axios.post('http://www.daemonset.site/interpret', {
+            const interpretResponse = await axios.post('http://localhost:5006/interpret', {
                 outputs: outputs
             }, {
                 headers: {
@@ -96,7 +96,7 @@ const DiagnosisPage = () => {
             });
             const interpretation = interpretResponse.data;
 
-            await axios.post('http://www.daemonset.site/save', {
+            await axios.post('http://localhost:5002/save', {
                 email: email,
                 s3_url: file_path
             }, {

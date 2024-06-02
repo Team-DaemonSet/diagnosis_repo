@@ -39,7 +39,7 @@ function App() {
         setToken(token);
 
         try {
-          const response = await axios.get('http://www.daemonset.site/protected', {
+          const response = await axios.get('http://localhost:5012/protected', {
             headers: {
               'Authorization': `Bearer ${token}`
             }

@@ -13,7 +13,7 @@ const HistoryPage = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const response = await axios.get('http://www.daemonset.site/protected', {
+                    const response = await axios.get('http://localhost:5012/protected', {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -35,7 +35,7 @@ const HistoryPage = () => {
     const getRecords = async (userEmail) => {
         try {
             const token = localStorage.getItem('token');
-            const historyresponse = await axios.get(`http://www.daemonset.site/records?email=${encodeURIComponent(userEmail)}`, {
+            const historyresponse = await axios.get(`http://localhost:5007/records?email=${encodeURIComponent(userEmail)}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
