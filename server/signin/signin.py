@@ -12,9 +12,6 @@ from prometheus_flask_exporter import PrometheusMetrics
 app = Flask(__name__)
 CORS(app)
 
-# 특정 도메인만 허용
-#CORS(app, resources={r"/*": {"origins": "http://webapp-service"}})
-
 ############# Database #################
 app.secret_key = 'TeamDaemonSet'
 app.config['MYSQL_HOST'] = 'dd-db.c7e8iuqi6hn4.ap-northeast-1.rds.amazonaws.com'

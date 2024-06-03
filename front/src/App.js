@@ -72,10 +72,14 @@ function App() {
         <div className="header">
           <Link to="/" className="daemonset-logo">DaemonSet</Link>
         </div>
-        <div className="user-info">
-          {isAuthenticated && <p>안녕하세요, {username} 님😈</p>}
-          {isAuthenticated && token && <TokenExpiration token={token} />}
-        </div>
+        {isAuthenticated && (
+          <div className="user-info-wrapper">
+            <div className="user-info">
+              <p>안녕하세요, {username} 님</p>
+            </div>
+            {token && <TokenExpiration token={token} />}
+          </div>
+        )}
         <Routes>
           <Route path="/" element={<DefaultPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
           <Route

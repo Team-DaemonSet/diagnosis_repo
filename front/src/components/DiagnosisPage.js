@@ -74,17 +74,7 @@ const DiagnosisPage = () => {
                 }
             });
             const { outputs } = preprocessResponse.data;
-            /*
-            const predictResponse = await axios.post('http://www.daemonset.site/predict', {
-                preprocessed_path: preprocessed_path
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            const { outputs } = predictResponse.data;
-            */
+            
             
             const interpretResponse = await axios.post('http://www.daemonset.site/interpret', {
                 outputs: outputs

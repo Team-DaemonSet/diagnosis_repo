@@ -1,3 +1,4 @@
+#모든 서버를 실행시키기 위한 파일
 import subprocess
 
 if __name__ == "__main__":
