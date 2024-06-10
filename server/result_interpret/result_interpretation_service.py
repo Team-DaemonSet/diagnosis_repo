@@ -39,6 +39,10 @@ def interpret_results(outputs):
     exp_scores = np.exp(scores)
     probs = exp_scores / np.sum(exp_scores) * 100
 
+    # 24번 특발 물방울 모양 멜라닌 저하증 확률을 1번 정상 확률에 더함
+    probs[0] += probs[23]
+    probs[23] = 0
+
     # 결과 딕셔너리 생성
     # 상위 두 개의 진단명을 찾기 위한 정렬
     sorted_indices = np.argsort(probs)[::-1]  # 내림차순 정렬

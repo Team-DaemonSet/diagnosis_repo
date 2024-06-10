@@ -108,7 +108,7 @@ const DiagnosisPage = () => {
 
             setDiagnosis(interpretation.Diagnosis);
             const { Diagnosis, "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2, Others } = interpretation;
-            setResult(JSON.stringify({ "Top 1 Diagnosis": top1, "Top 2 Diagnosis": top2 }, null, 2));
+            setResult(`결과: ${top1.Name} (${top1.Probability})\n ${top2.Name} (${top2.Probability})`);
 
             // 차트 데이터를 설정
             const otherTotal = Others.reduce((acc, item) => acc + parseFloat(item.Probability), 0);
